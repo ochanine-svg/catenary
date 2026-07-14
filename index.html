@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Catenary</title>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+      color: #111;
+      background: #f4f4f4;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 19px;
+      line-height: 1.58;
+    }
+
+    main {
+      width: 100%;
+      margin: 0;
+      padding: 28px 34px 46px;
+      background: #fff;
+      border: 1px solid #ddd;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: 1.7rem;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 46px 0 20px;
+      padding-bottom: 5px;
+      font-size: 1.4rem;
+      border-bottom: 1px solid #bbb;
+    }
+
+    p {
+      margin: 0 0 1.15em;
+    }
+
+    .figure {
+      margin: 26px auto 30px;
+      text-align: center;
+    }
+
+    .figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .park-chain img {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .force-diagram img {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .key-property {
+      margin: 28px 0;
+      padding: 17px 20px;
+      background: #f7f7f7;
+      border-left: 4px solid #555;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .exercise {
+      margin-top: 34px;
+    }
+
+    .exercise-title {
+      font-weight: bold;
+    }
+
+    .solution-title {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    mjx-container[display="true"] {
+      margin: 1.15em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.25em 0;
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding: 12px;
+        font-size: 17px;
+        background: #f4f4f4;
+      }
+
+      main {
+        padding: 22px 18px 40px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        margin-top: 38px;
+        font-size: 1.3rem;
+      }
+
+      .figure {
+        margin: 22px auto 26px;
+      }
+
+      .key-property {
+        padding: 15px 14px;
+      }
+    }
+
+    @media print {
+      body {
+        max-width: none;
+        padding: 0;
+        background: #fff;
+      }
+
+      main {
+        border: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main>
+
+  <h1>The Catenary</h1>
+
+  <p>
+    A chain hanging from two endpoints settles into an equilibrium
+    position. The universal shape of the hanging chain is called the
+    <em>catenary</em>.
+  </p>
+
+  <div class="figure park-chain">
+    <img
+      src="parkchain.png"
+      alt="A chain hanging between two supports"
+    >
+  </div>
+
+  <p>
+    We will use the fact that the forces on the chain at rest are
+    balanced. This will lead us to the key mathematical property of the
+    catenary and reveal the Calculus II function that produces it.
+  </p>
+
+  <p>
+    Let us use a coordinate system such that the \(y\)-axis passes
+    through the lowest point on the chain. Consider a right-hand segment
+    of the chain from the lowest point \(t=0\) to any point on the chain
+    \(t=x&gt;0\), making an arc of length \(s\).
+  </p>
+
+  <p>
+    The external forces acting on this chain segment must balance and
+    sum to zero. These external forces are the horizontal tension at the
+    lowest point \(\vec H\), pointing left; the tension \(\vec T\) at
+    \(x\), tangent to the curve; and the downward force \(\vec W\) due
+    to gravity acting on the entire segment.
+  </p>
+
+  <div class="figure force-diagram">
+    <img
+      src="T.png"
+      alt="Force diagram for a segment of a hanging chain"
+    >
+  </div>
+
+  <p>
+    Let \(H\), \(T\), and \(W\) denote the magnitudes of the force
+    vectors. Balancing forces in the horizontal direction gives
+    \(H=T\cos\theta\). Balancing forces in the vertical direction gives
+    \(W=T\sin\theta\).
+  </p>
+
+  <p>
+    Assuming a uniform chain with constant linear mass density
+    \(\lambda\), we can write
+  </p>
+
+  \[
+  W=mg=(\lambda s)g.
+  \]
+
+  <p>
+    We can now deduce the defining mathematical property of the
+    catenary:
+  </p>
+
+  \[
+  \tan\theta
+  =
+  \frac{W}{H}
+  =
+  \frac{\lambda gs}{H}
+  =
+  cs,
+  \qquad
+  \text{where }
+  c=\frac{\lambda g}{H}.
+  \]
+
+  <h2>The Differential Equation</h2>
+
+  <p>
+    Written in terms of the curve \(y(x)\), the key property becomes
+    the differential equation
+  </p>
+
+  \[
+  y'(x)
+  =
+  c\int_0^x
+  \sqrt{1+\bigl(y'(t)\bigr)^2}\,dt.
+  \]
+
+  <div class="key-property">
+    The slope of the catenary is proportional to arc length measured
+    from the lowest point.
+  </div>
+
+  <p>
+    It is possible to solve this differential equation directly and
+    find that the function we are looking for is none other than the
+    hyperbolic cosine:
+  </p>
+
+  \[
+  y(x)=\frac{1}{c}\cosh(cx).
+  \]
+
+  <p>
+    Since the calculus sequence does not cover differential equations,
+    we will instead verify that the function above is a solution.
+  </p>
+
+  <div class="exercise">
+    <p>
+      <span class="exercise-title">Calculus II Exercise 1:</span>
+      Verify that
+    </p>
+
+    \[
+    y'(x)=\sinh(cx).
+    \]
+
+    <p class="solution-title">Solution:</p>
+
+    \[
+    \begin{aligned}
+    y(x)
+    &=
+    \frac{1}{c}\cosh(cx)
+    \\[4pt]
+    &=
+    \frac{1}{c}
+    \left(
+      \frac{e^{cx}+e^{-cx}}{2}
+    \right),
+    \\[7pt]
+    y'(x)
+    &=
+    \frac{1}{c}
+    \left(
+      \frac{ce^{cx}-ce^{-cx}}{2}
+    \right)
+    \\[4pt]
+    &=
+    \frac{e^{cx}-e^{-cx}}{2}
+    \\[4pt]
+    &=
+    \sinh(cx).
+    \end{aligned}
+    \]
+  </div>
+
+  <div class="exercise">
+    <p>
+      <span class="exercise-title">Calculus II Exercise 2:</span>
+      Verify that the arc length of \(y(x)\) from the lowest point to
+      \(x\) equals
+    </p>
+
+    \[
+    \int_0^x
+    \sqrt{1+\bigl(y'(t)\bigr)^2}\,dt
+    =
+    \frac{1}{c}\sinh(cx).
+    \]
+
+    <p class="solution-title">Solution:</p>
+
+    \[
+    \begin{aligned}
+    \int_0^x
+    \sqrt{1+\bigl(y'(t)\bigr)^2}\,dt
+    &=
+    \int_0^x
+    \sqrt{1+\sinh^2(ct)}\,dt
+    \\[5pt]
+    &=
+    \int_0^x
+    \sqrt{\cosh^2(ct)}\,dt
+    \\[5pt]
+    &=
+    \int_0^x
+    \cosh(ct)\,dt
+    \\[5pt]
+    &=
+    \frac{1}{c}
+    \int_0^{cx}
+    \cosh u\,du
+    \\[5pt]
+    &=
+    \frac{1}{c}\sinh(cx).
+    \end{aligned}
+    \]
+
+    <p>
+      Therefore,
+    </p>
+
+    \[
+    c\int_0^x
+    \sqrt{1+\bigl(y'(t)\bigr)^2}\,dt
+    =
+    \sinh(cx)
+    =
+    y'(x),
+    \]
+
+    <p>
+      so \(y(x)=\frac{1}{c}\cosh(cx)\) satisfies the defining
+      differential equation of the catenary.
+    </p>
+  </div>
+
+</main>
+</body>
+</html>
